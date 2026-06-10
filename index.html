@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tekis.services — Empoderando personas con tecnología</title>
+<meta name="description" content="Consultoría tecnológica, capacitación en habilidades digitales y contenido EdTech. Re-evoluciona digitalmente con tekis.services.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B0B0B;
+  --panel:#141414;
+  --line:#2A2A2A;
+  --crema:#FAFAF2;
+  --gris:#9A9A92;
+  --rosa:#FF2D95;
+  --morado:#B14CFF;
+  --lila:#C9A7FF;
+  --radius:18px;
+  --shadow-y:8px 8px 0 var(--rosa);
+  --shadow-v:8px 8px 0 var(--morado);
+  --shadow-l:8px 8px 0 var(--lila);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--crema);
+  font-family:'DM Sans',sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+::selection{background:var(--rosa);color:var(--ink)}
+
+/* ---- textura de grano ---- */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.mono{font-family:'Space Mono',monospace}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px clamp(20px,5vw,56px);
+  background:rgba(11,11,11,.78);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;letter-spacing:-.02em}
+.logo .dot{color:var(--rosa)}
+.logo .sub{color:var(--morado);font-weight:500;font-family:'Space Mono',monospace;font-size:.95rem}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{
+  font-family:'Space Mono',monospace;font-size:.82rem;color:var(--gris);
+  transition:color .25s;
+}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--rosa)}
+.nav-cta{
+  font-family:'Space Mono',monospace;font-size:.82rem;font-weight:700;
+  color:var(--ink)!important;background:var(--rosa);
+  padding:10px 18px;border-radius:999px;border:2px solid var(--rosa);
+  transition:transform .2s, background .2s;
+  display:inline-block;
+}
+.nav-cta:hover{transform:translate(-2px,-2px);background:var(--morado);border-color:var(--morado)}
+@media(max-width:760px){.nav-links a:not(.nav-cta){display:none}}
+
+/* ---------- HERO ---------- */
+header{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding:130px clamp(20px,5vw,56px) 60px;position:relative;
+}
+.hero-eyebrow{
+  font-family:'Space Mono',monospace;font-size:.85rem;color:var(--morado);
+  margin-bottom:22px;display:flex;align-items:center;gap:10px;
+  opacity:0;animation:rise .8s .1s forwards;
+}
+.hero-eyebrow::before{
+  content:"";width:10px;height:10px;border-radius:50%;background:var(--morado);
+  animation:blink 1.6s infinite;
+}
+h1{
+  font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-.03em;
+  font-size:clamp(3.4rem,11vw,8.5rem);line-height:.96;
+  opacity:0;animation:rise .9s .25s forwards;
+}
+h1 .dot{color:var(--rosa)}
+.rotator-wrap{display:block;height:1.02em;position:relative}
+.rotator{
+  display:inline-block;position:relative;color:var(--morado);min-width:8.2ch;height:1em;
+}
+.rotator span{
+  position:absolute;left:0;top:0;opacity:0;transform:translateY(28px);
+  transition:opacity .45s, transform .45s;white-space:nowrap;
+}
+.rotator span.active{opacity:1;transform:translateY(0)}
+.rotator span::after{
+  content:"";display:inline-block;width:.09em;height:.82em;background:var(--rosa);
+  margin-left:.1em;vertical-align:-.04em;animation:blink 1s steps(1) infinite;
+}
+.cursor-bar{
+  display:inline-block;width:.09em;height:.82em;background:var(--rosa);
+  margin-left:.08em;vertical-align:-.06em;animation:blink 1s steps(1) infinite;
+}
+.hero-sub{
+  max-width:560px;margin-top:34px;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--gris);
+  opacity:0;animation:rise .9s .45s forwards;
+}
+.hero-sub strong{color:var(--crema)}
+.hero-actions{
+  display:flex;gap:18px;margin-top:42px;flex-wrap:wrap;
+  opacity:0;animation:rise .9s .6s forwards;
+}
+.btn{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;
+  padding:16px 30px;border-radius:14px;display:inline-flex;align-items:center;gap:10px;
+  border:2px solid var(--crema);transition:transform .18s, box-shadow .18s, background .18s,color .18s;
+  cursor:pointer;
+}
+.btn-primary{background:var(--rosa);color:var(--ink);border-color:var(--rosa);box-shadow:6px 6px 0 var(--morado)}
+.btn-primary:hover,.btn-primary:focus-visible{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--morado)}
+.btn-ghost{background:transparent;color:var(--crema)}
+.btn-ghost:hover,.btn-ghost:focus-visible{background:var(--crema);color:var(--ink);transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--lila)}
+.hero-blob{
+  position:absolute;right:-12vw;top:18%;width:46vw;height:46vw;max-width:680px;max-height:680px;
+  background:radial-gradient(circle at 35% 35%, rgba(177,76,255,.18), transparent 60%),
+             radial-gradient(circle at 70% 70%, rgba(255,45,149,.12), transparent 55%);
+  filter:blur(8px);pointer-events:none;animation:floaty 9s ease-in-out infinite;
+}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes blink{50%{opacity:0}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+
+/* ---------- MARQUEE ---------- */
+.marquee{
+  border-top:2px solid var(--rosa);border-bottom:2px solid var(--rosa);
+  background:var(--rosa);color:var(--ink);overflow:hidden;white-space:nowrap;
+  transform:rotate(-1.2deg) scale(1.02);margin:10px 0 0;
+}
+.marquee-track{
+  display:inline-flex;gap:46px;padding:14px 0;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;
+  animation:scroll 26s linear infinite;
+}
+.marquee-track span::after{content:"✦";margin-left:46px;color:var(--ink)}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ---------- SECCIONES ---------- */
+section{padding:110px clamp(20px,5vw,56px);max-width:1240px;margin:0 auto}
+.eyebrow{
+  font-family:'Space Mono',monospace;font-size:.85rem;color:var(--morado);margin-bottom:16px;
+}
+.eyebrow .d{color:var(--rosa)}
+h2{
+  font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-.02em;
+  font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.05;max-width:760px;
+}
+h2 em{font-style:normal;color:var(--rosa)}
+.section-intro{max-width:620px;color:var(--gris);margin-top:20px;font-size:1.08rem}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s ease, transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- SERVICIOS ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:28px;margin-top:56px}
+.card{
+  background:var(--panel);border:2px solid var(--crema);border-radius:var(--radius);
+  padding:36px 30px;position:relative;transition:transform .2s, box-shadow .2s;
+}
+.card:nth-child(1){box-shadow:var(--shadow-y)}
+.card:nth-child(2){box-shadow:var(--shadow-v)}
+.card:nth-child(3){box-shadow:var(--shadow-l)}
+.card:hover{transform:translate(-5px,-5px)}
+.card:nth-child(1):hover{box-shadow:13px 13px 0 var(--rosa)}
+.card:nth-child(2):hover{box-shadow:13px 13px 0 var(--morado)}
+.card:nth-child(3):hover{box-shadow:13px 13px 0 var(--lila)}
+.card .tag{
+  font-family:'Space Mono',monospace;font-size:.78rem;display:inline-block;
+  border:1.5px solid var(--line);border-radius:999px;padding:5px 13px;color:var(--gris);margin-bottom:22px;
+}
+.card h3{
+  font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.15;
+  font-size:clamp(1.2rem,1.1vw + .75rem,1.45rem);overflow-wrap:break-word;
+}
+.card h3 .dot{color:var(--rosa)}
+.card:nth-child(2) h3 .dot{color:var(--morado)}
+.card:nth-child(3) h3 .dot{color:var(--lila)}
+.card p{color:var(--gris);margin-top:14px}
+.card ul{margin-top:18px;list-style:none}
+.card li{
+  padding-left:22px;position:relative;color:var(--crema);font-size:.95rem;margin-top:8px;
+}
+.card li::before{content:"→";position:absolute;left:0;color:var(--morado);font-family:'Space Mono',monospace}
+
+/* ---------- POR QUÉ ---------- */
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:56px}
+.why-item{background:var(--ink);padding:38px 30px;transition:background .3s}
+.why-item:hover{background:var(--panel)}
+.why-item .n{
+  font-family:'Space Mono',monospace;color:var(--rosa);font-size:.85rem;margin-bottom:14px;display:block;
+}
+.why-item h4{font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:700;margin-bottom:10px}
+.why-item p{color:var(--gris);font-size:.97rem}
+
+/* ---------- FOUNDER ---------- */
+.founder{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;
+}
+@media(max-width:860px){.founder{grid-template-columns:1fr}}
+.founder-quote{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1.4rem,3vw,2rem);line-height:1.3;
+  border-left:5px solid var(--morado);padding-left:26px;margin-top:30px;
+}
+.founder-quote .hl{background:var(--rosa);color:var(--ink);padding:0 .15em}
+.creds{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.cred{
+  font-family:'Space Mono',monospace;font-size:.78rem;border:1.5px solid var(--line);
+  border-radius:999px;padding:7px 15px;color:var(--gris);transition:all .25s;cursor:default;
+}
+.cred:hover{border-color:var(--morado);color:var(--morado);transform:translateY(-3px)}
+.founder-panel{
+  background:var(--panel);border:2px solid var(--crema);border-radius:var(--radius);
+  box-shadow:var(--shadow-v);padding:40px 34px;
+}
+.founder-panel .mono-line{font-family:'Space Mono',monospace;font-size:.85rem;color:var(--morado)}
+.founder-panel h3{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;margin-top:10px}
+.founder-panel p{color:var(--gris);margin-top:14px;font-size:.98rem}
+.founder-panel .links{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap}
+.mini-link{
+  font-family:'Space Mono',monospace;font-size:.8rem;color:var(--rosa);
+  border-bottom:1.5px solid transparent;transition:border-color .2s;
+}
+.mini-link:hover{border-color:var(--rosa)}
+
+/* ---------- ECOSISTEMA ---------- */
+.eco{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:50px}
+.eco-item{
+  display:block;border:2px dashed var(--line);border-radius:var(--radius);padding:30px 26px;
+  transition:border-color .25s, transform .25s;
+}
+a.eco-item:hover h4 .dot{color:var(--rosa)}
+.eco-cta{
+  display:inline-block;color:var(--rosa);font-weight:700;white-space:nowrap;
+  border-bottom:2px solid var(--rosa);transition:color .25s, border-color .25s;
+}
+a.eco-item:hover .eco-cta{color:var(--morado);border-color:var(--morado)}
+.eco-item:hover{border-color:var(--rosa);transform:translateY(-5px)}
+.eco-item h4{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem}
+.eco-item h4 .dot{color:var(--morado)}
+.eco-item p{color:var(--gris);font-size:.92rem;margin-top:10px}
+
+/* ---------- CTA FINAL ---------- */
+.cta-final{
+  text-align:center;padding:130px clamp(20px,5vw,56px);
+  position:relative;overflow:hidden;max-width:none;
+}
+.cta-final h2{margin:0 auto;font-size:clamp(2.6rem,7vw,5.4rem)}
+.cta-final p{color:var(--gris);max-width:520px;margin:24px auto 0;font-size:1.1rem}
+.cta-final .hero-actions{justify-content:center;opacity:1;animation:none}
+.cta-glow{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:80vw;height:80vw;max-width:900px;max-height:900px;pointer-events:none;
+  background:radial-gradient(circle, rgba(255,45,149,.08), transparent 60%);
+}
+.email-line{margin-top:34px;font-family:'Space Mono',monospace;font-size:.9rem;color:var(--gris)}
+.email-line a{color:var(--morado);border-bottom:1.5px solid var(--morado)}
+
+/* ---------- FOOTER ---------- */
+footer{
+  border-top:1px solid var(--line);padding:36px clamp(20px,5vw,56px);
+  display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+  font-family:'Space Mono',monospace;font-size:.8rem;color:var(--gris);
+}
+footer .logo{font-size:1.05rem}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  h1,.hero-eyebrow,.hero-sub,.hero-actions{opacity:1}
+}
+:focus-visible{outline:3px solid var(--morado);outline-offset:3px}
+
+/* ---------- CURSOR CUSTOM ---------- */
+@media (pointer:fine){
+  body{cursor:none}
+  a,button,.btn{cursor:none}
+  .cur-dot,.cur-ring{
+    position:fixed;top:0;left:0;pointer-events:none;z-index:1000;border-radius:50%;
+    transform:translate(-50%,-50%);
+  }
+  .cur-dot{
+    width:8px;height:8px;background:var(--rosa);
+    transition:width .2s, height .2s, background .2s;
+  }
+  .cur-ring{
+    width:38px;height:38px;border:1.5px solid var(--morado);
+    transition:width .25s, height .25s, border-color .25s, opacity .25s;
+    mix-blend-mode:difference;
+  }
+  body.cur-hover .cur-dot{width:14px;height:14px;background:var(--morado)}
+  body.cur-hover .cur-ring{width:64px;height:64px;border-color:var(--rosa)}
+  body.cur-down .cur-ring{width:28px;height:28px}
+}
+@media (pointer:coarse), (prefers-reduced-motion: reduce){
+  .cur-dot,.cur-ring{display:none}
+  body, a, button, .btn{cursor:auto}
+}
+
+/* ---------- MOTION DISCRETO EN CTAs ---------- */
+.btn{position:relative}
+.btn:active{transform:translate(0,0) scale(.97)!important}
+.btn .ico{display:inline-block;transition:transform .25s}
+.btn:hover .ico{transform:translateX(4px) rotate(-8deg)}
+.btn-primary{animation:breathe 3.2s ease-in-out infinite}
+.btn-primary:hover{animation-play-state:paused}
+@keyframes breathe{
+  0%,100%{box-shadow:6px 6px 0 var(--morado)}
+  50%{box-shadow:9px 9px 0 var(--morado)}
+}
+
+/* ---------- UX ---------- */
+section, .cta-final{scroll-margin-top:92px}
+.nav-cta:active{transform:scale(.95)}
+
+</style>
+</head>
+<body>
+<div class="cur-ring" aria-hidden="true"></div>
+<div class="cur-dot" aria-hidden="true"></div>
+
+<nav>
+  <a class="logo" href="#top">tekis<span class="dot">.</span><span class="sub">services</span></a>
+  <div class="nav-links">
+    <a href="#servicios">nuestros.servicios</a>
+    <a href="#porque">por-qué.elegirnos</a>
+    <a href="#nancy">quién.está-detrás</a>
+    <a href="#ecosistema">eco.sistema</a>
+    <a class="nav-cta" href="https://wa.me/524771786634" target="_blank" rel="noopener">hablemos →</a>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="hero-blob" aria-hidden="true"></div>
+  <p class="hero-eyebrow">online — desde León, Gto. para todo LATAM</p>
+  <h1>
+    <span>tekis<span class="dot">.</span></span>
+    <span class="rotator-wrap"><span class="rotator" aria-hidden="true">
+      <span class="active">services</span>
+      <span>boost</span>
+      <span>insights</span>
+      <span>comm</span>
+      <span>futuro</span>
+    </span></span>
+    <span class="sr-only">services</span>
+  </h1>
+  <p class="hero-sub"><strong>Empoderando personas con tecnología.</strong> Consultoría, capacitación en habilidades digitales y contenido EdTech para que tú y tu equipo prosperen en la era digital — sin promesas mágicas, con resultados reales.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="https://wa.me/524771786634" target="_blank" rel="noopener">re-evoluciona conmigo <span class="ico">⚡</span></a>
+    <a class="btn btn-ghost" href="#servicios">saber.más <span class="ico">↓</span></a>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>empoderando personas con tecnología</span>
+    <span>habilidades digitales</span>
+    <span>consultoría tech</span>
+    <span>EdTech</span>
+    <span>IA aplicada</span>
+    <span>empoderando personas con tecnología</span>
+    <span>habilidades digitales</span>
+    <span>consultoría tech</span>
+    <span>EdTech</span>
+    <span>IA aplicada</span>
+  </div>
+</div>
+
+<section id="servicios">
+  <p class="eyebrow reveal">tekis<span class="d">.</span>services / 01</p>
+  <h2 class="reveal">Nuestros<em>.</em>servicios</h2>
+  <p class="section-intro reveal">Tres formas de desbloquear tu máximo potencial digital. Elige tu punto de partida — o combínalos.</p>
+
+  <div class="cards">
+    <article class="card reveal">
+      <span class="tag">consultoría</span>
+      <h3>Tech<span class="dot">.</span>Insights</h3>
+      <p>Consultoría tecnológica que te da perspectivas clave sobre cómo aprovechar la tecnología en tu organización — del diagnóstico a la decisión.</p>
+      <ul>
+        <li>Diagnóstico de madurez digital</li>
+        <li>Estrategia de adopción de IA y herramientas</li>
+        <li>Acompañamiento en transformación digital</li>
+      </ul>
+    </article>
+    <article class="card reveal">
+      <span class="tag">capacitación</span>
+      <h3>Digital<span class="dot">.</span>Boost</h3>
+      <p>Programas de capacitación dinámicos que impulsan a tu equipo a descubrir y dominar habilidades digitales que sí se usan el lunes siguiente.</p>
+      <ul>
+        <li>Talleres de IA aplicada para equipos</li>
+        <li>Workshops de comunicación y liderazgo tech</li>
+        <li>Conferencias y keynotes</li>
+      </ul>
+    </article>
+    <article class="card reveal">
+      <span class="tag">contenido EdTech</span>
+      <h3>Creadores<span class="dot">.</span>Online</h3>
+      <p>Desarrollo de contenido online auténtico y creativo para plataformas EdTech — cursos, guiones y experiencias de aprendizaje que enganchan.</p>
+      <ul>
+        <li>Diseño instruccional con voz propia</li>
+        <li>Producción de cursos y microlearning</li>
+        <li>Estrategia editorial para EdTech</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section id="porque">
+  <p class="eyebrow reveal">tekis<span class="d">.</span>services / 02</p>
+  <h2 class="reveal">Por&#8209;qué<em>.</em>elegirnos</h2>
+  <div class="why reveal">
+    <div class="why-item">
+      <span class="n">[ vivimos en internet ]</span>
+      <h4>Estés donde estés, ahí estaremos</h4>
+      <p>Trabajamos 100% online, con la flexibilidad de quien habita lo digital todos los días. Desde el Bajío para todo LATAM.</p>
+    </div>
+    <div class="why-item">
+      <span class="n">[ máxima prioridad: tú ]</span>
+      <h4>Personas primero, tecnología después</h4>
+      <p>La tecnología no es neutral: importa quién la piensa, quién la usa y quién decide sobre ella. Diseñamos para personas reales.</p>
+    </div>
+    <div class="why-item">
+      <span class="n">[ cero promesas mágicas ]</span>
+      <h4>Crítica al hype, fieles a los datos</h4>
+      <p>Nada de clichés corporativos. Traducimos lo técnico a lenguaje útil, con evidencia y mirada latinoamericana.</p>
+    </div>
+    <div class="why-item">
+      <span class="n">[ re-evoluciona ]</span>
+      <h4>Cambiemos el panorama digital</h4>
+      <p>No adoptamos herramientas por moda: transformamos procesos, hábitos y culturas. Eso es e.volucionar digitalmente.</p>
+    </div>
+  </div>
+</section>
+
+<section id="nancy">
+  <p class="eyebrow reveal">tekis<span class="d">.</span>services / 03</p>
+  <div class="founder">
+    <div>
+      <h2 class="reveal">Quién<em>.</em>está-detrás</h2>
+      <p class="founder-quote reveal">"El futuro digital se construye con más personas <span class="hl">adentro de la conversación</span>, no afuera."</p>
+      <div class="creds reveal">
+        <span class="cred">TEDx Speaker</span>
+        <span class="cred">LinkedIn Top Voice 2022</span>
+        <span class="cred">Google Cloud Gen AI Leader</span>
+        <span class="cred">MTI · Tec de Monterrey</span>
+        <span class="cred">Columnista AM & Pro León</span>
+        <span class="cred">Mentora BécALAS · Techstars</span>
+      </div>
+    </div>
+    <aside class="founder-panel reveal">
+      <p class="mono-line">&gt; founder_</p>
+      <h3>Nancy Salazar</h3>
+      <p>Especialista en Tecnologías de la Información y Maestra en Administración de TI con mención honorífica de excelencia. Acompaña proyectos de transformación digital en gobierno, empresas y comunidades, y mentorea a mujeres en STEM en todo LATAM.</p>
+      <div class="links">
+        <a class="mini-link" href="https://linkedin.com/in/nancynsalazar" target="_blank" rel="noopener">linkedin ↗</a>
+        <a class="mini-link" href="https://nancynsalazar.tech" target="_blank" rel="noopener">nancynsalazar.tech ↗</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section id="ecosistema">
+  <p class="eyebrow reveal">tekis<span class="d">.</span>services / 04</p>
+  <h2 class="reveal">Eco<em>.</em>sistema</h2>
+  <p class="section-intro reveal">tekis es más que servicios: es una comunidad de contenido y conversación sobre cultura digital.</p>
+  <div class="eco">
+    <a class="eco-item reveal" href="https://chat.whatsapp.com/J8SkEvJMfJZHoII4nUNcxC" target="_blank" rel="noopener">
+      <h4>tekis<span class="dot">.</span>comm</h4>
+      <p>Nuestra comunidad en WhatsApp: noticias, oportunidades y conversación tech en tiempo real. <span class="eco-cta">Únete →</span></p>
+    </a>
+    <a class="eco-item reveal" href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=6942529162846879745" target="_blank" rel="noopener">
+      <h4>tekis<span class="dot">.</span>news</h4>
+      <p>Curaduría de noticias tech con mirada crítica y latinoamericana. <span class="eco-cta">Suscríbete en LinkedIn →</span></p>
+    </a>
+    <a class="eco-item reveal" href="https://open.spotify.com/show/4d6fky0oIbNeyxAMKPEGNR?si=fifyZaj-Rbm9EyinEa2xDA" target="_blank" rel="noopener">
+      <h4>tekis<span class="dot">.</span>mindset</h4>
+      <p>El podcast donde la tecnología se platica sin tecnicismos ni hype. <span class="eco-cta">Escúchalo en Spotify →</span></p>
+    </a>
+  </div>
+</section>
+
+<div class="cta-final">
+  <div class="cta-glow" aria-hidden="true"></div>
+  <p class="eyebrow reveal">contácta<span class="d">.</span>nos</p>
+  <h2 class="reveal">¡E<em>.</em>voluciona digitalmente!</h2>
+  <p class="reveal">Únete a nosotros y descubre cómo podemos ayudarte a desbloquear tu máximo potencial en el mundo digital.</p>
+  <div class="hero-actions reveal">
+    <a class="btn btn-primary" href="https://wa.me/524771786634" target="_blank" rel="noopener">escríbeme por WhatsApp <span class="ico">💬</span></a>
+    <a class="btn btn-ghost" href="mailto:hola@nancynsalazar.tech">enviar un correo <span class="ico">✉</span></a>
+  </div>
+  <p class="email-line reveal">&gt; <a href="mailto:hola@nancynsalazar.tech">hola@nancynsalazar.tech</a></p>
+</div>
+
+<footer>
+  <span class="logo">tekis<span class="dot">.</span><span class="sub">services</span></span>
+  <span>© 2026 · hecho con 💜 + 🧠 + ⚡ en León, Guanajuato, México</span>
+</footer>
+
+<script>
+/* ---- palabra rotatoria del hero ---- */
+const words = document.querySelectorAll('.rotator span');
+let wi = 0;
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduced && words.length){
+  setInterval(()=>{
+    words[wi].classList.remove('active');
+    wi = (wi+1) % words.length;
+    words[wi].classList.add('active');
+  }, 2200);
+}
+
+
+/* ---- cursor custom con inercia ---- */
+const fine = window.matchMedia('(pointer:fine)').matches;
+if(fine && !reduced){
+  const dot = document.querySelector('.cur-dot');
+  const ring = document.querySelector('.cur-ring');
+  let mx=-100,my=-100,rx=-100,ry=-100;
+  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function loop(){
+    rx += (mx-rx)*.16; ry += (my-ry)*.16;
+    dot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+    ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a,button,.btn').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('cur-hover'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('cur-hover'));
+  });
+  window.addEventListener('mousedown',()=>document.body.classList.add('cur-down'));
+  window.addEventListener('mouseup',()=>document.body.classList.remove('cur-down'));
+}
+
+/* ---- reveal on scroll ---- */
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
