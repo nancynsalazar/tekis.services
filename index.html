@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tekis.services — Empoderando personas con tecnología</title>
+<title>tekis.services — v2 rainbow</title>
 <meta name="description" content="Consultoría tecnológica, capacitación en habilidades digitales y contenido EdTech. Re-evoluciona digitalmente con tekis.services.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -332,6 +332,104 @@ footer .logo{font-size:1.05rem}
 section, .cta-final{scroll-margin-top:92px}
 .nav-cta:active{transform:scale(.95)}
 
+</style>
+
+<style>
+/* ============ V2 · RAINBOW × NEGRO ============ */
+:root{
+  --r1:#FF3B30;--r2:#FF9500;--r3:#FFE600;--r4:#2CFF6B;--r5:#00C8FF;--r6:#B14CFF;--r7:#FF2D95;
+  --rainbow:linear-gradient(90deg,var(--r1),var(--r2),var(--r3),var(--r4),var(--r5),var(--r6),var(--r7));
+}
+::selection{background:var(--r3);color:#000}
+:focus-visible{outline:3px solid var(--r5)}
+
+.grad-text, .logo .dot, .logo .sub, h1 .dot, h2 em, .eyebrow .d,
+.card h3 .dot, .eco-item h4 .dot{
+  background:var(--rainbow);background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:hueslide 6s linear infinite;
+}
+@keyframes hueslide{to{background-position:300% 0}}
+
+.hero-eyebrow{color:var(--crema)}
+.hero-eyebrow::before{
+  background:conic-gradient(var(--r1),var(--r2),var(--r3),var(--r4),var(--r5),var(--r6),var(--r7),var(--r1));
+  animation:spin 3s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.rotator span{
+  background:var(--rainbow);background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:hueslide 6s linear infinite;
+}
+.rotator span::after{background:var(--crema)}
+
+.hero-blob{
+  background:radial-gradient(circle at 30% 30%, rgba(255,59,48,.12), transparent 55%),
+             radial-gradient(circle at 70% 40%, rgba(0,200,255,.12), transparent 55%),
+             radial-gradient(circle at 50% 75%, rgba(177,76,255,.14), transparent 55%);
+}
+
+.marquee{background:var(--rainbow);background-size:300% 100%;border-color:#000;color:#000;animation:hueslide 12s linear infinite}
+
+.btn-primary{
+  background:var(--rainbow);background-size:300% 100%;color:#000;border-color:#000;
+  box-shadow:6px 6px 0 var(--crema);animation:breathe2 3.2s ease-in-out infinite, hueslide 6s linear infinite;
+}
+.btn-primary:hover,.btn-primary:focus-visible{box-shadow:9px 9px 0 var(--crema)}
+@keyframes breathe2{0%,100%{box-shadow:6px 6px 0 var(--crema)}50%{box-shadow:9px 9px 0 var(--crema)}}
+.btn-ghost:hover,.btn-ghost:focus-visible{box-shadow:9px 9px 0 var(--r5)}
+
+.card:nth-child(1){box-shadow:8px 8px 0 var(--r1)}
+.card:nth-child(2){box-shadow:8px 8px 0 var(--r3)}
+.card:nth-child(3){box-shadow:8px 8px 0 var(--r5)}
+.card:nth-child(1):hover{box-shadow:13px 13px 0 var(--r1)}
+.card:nth-child(2):hover{box-shadow:13px 13px 0 var(--r3)}
+.card:nth-child(3):hover{box-shadow:13px 13px 0 var(--r5)}
+.card:nth-child(1) h3 .dot{animation-delay:0s}
+.card li::before{color:var(--r4)}
+.card:nth-child(1) .tag{border-color:var(--r1);color:var(--r1)}
+.card:nth-child(2) .tag{border-color:var(--r3);color:var(--r3)}
+.card:nth-child(3) .tag{border-color:var(--r5);color:var(--r5)}
+
+.eyebrow{color:var(--crema)}
+.why-item:nth-child(1) .n{color:var(--r1)}
+.why-item:nth-child(2) .n{color:var(--r3)}
+.why-item:nth-child(3) .n{color:var(--r4)}
+.why-item:nth-child(4) .n{color:var(--r5)}
+
+.founder-quote{border-left:none;border-image:linear-gradient(180deg,var(--r1),var(--r5),var(--r7)) 1;border-left:5px solid}
+.founder-quote .hl{background:var(--r3);color:#000}
+.cred:hover{border-color:var(--r5);color:var(--r5)}
+.founder-panel{box-shadow:8px 8px 0 var(--r6)}
+.founder-panel .mono-line{color:var(--r4)}
+.mini-link{color:var(--r3)}
+.mini-link:hover{border-color:var(--r3)}
+
+.eco-item:hover{border-color:var(--r5)}
+.eco-cta{
+  background:var(--rainbow);background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:hueslide 6s linear infinite;border-bottom:2px solid var(--crema);
+}
+a.eco-item:hover .eco-cta{border-color:var(--r5)}
+
+.cta-glow{background:radial-gradient(circle, rgba(255,59,48,.05) 0%, rgba(0,200,255,.06) 35%, rgba(177,76,255,.05) 55%, transparent 70%)}
+.email-line a{color:var(--r4);border-color:var(--r4)}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--r3)}
+.nav-cta{background:var(--rainbow);background-size:300% 100%;border-color:#000;color:#000!important;animation:hueslide 6s linear infinite}
+.nav-cta:hover{transform:translate(-2px,-2px)}
+
+@media (pointer:fine){
+  .cur-dot{background:conic-gradient(var(--r1),var(--r3),var(--r4),var(--r5),var(--r6),var(--r7),var(--r1));animation:spin 2.4s linear infinite}
+  .cur-ring{border-color:var(--crema)}
+  body.cur-hover .cur-dot{background:conic-gradient(var(--r1),var(--r3),var(--r4),var(--r5),var(--r6),var(--r7),var(--r1))}
+  body.cur-hover .cur-ring{border-color:var(--r3)}
+}
+@media (prefers-reduced-motion: reduce){
+  .grad-text,.logo .dot,.logo .sub,h1 .dot,h2 em,.eyebrow .d,.card h3 .dot,.eco-item h4 .dot,.rotator span,.eco-cta,.marquee,.btn-primary,.nav-cta,.cur-dot,.hero-eyebrow::before{animation:none!important}
+}
 </style>
 </head>
 <body>
