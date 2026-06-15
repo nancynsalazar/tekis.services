@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tekis.services</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230B0B0B'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23FF3B30'/><stop offset='0.25' stop-color='%23FFD400'/><stop offset='0.5' stop-color='%2300C853'/><stop offset='0.75' stop-color='%238E3DFF'/><stop offset='1' stop-color='%23FF2D95'/></linearGradient></defs><circle cx='32' cy='32' r='17' fill='url(%23g)'/></svg>">
+<title>tekis.services — v2 rainbow</title>
 <meta name="description" content="Consultoría tecnológica, capacitación en habilidades digitales y contenido EdTech. Re-evoluciona digitalmente con tekis.services.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%27http%3A//www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27><rect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27#0B0B0B%27/><defs><linearGradient id=%27g%27 x1=%270%27 y1=%270%27 x2=%271%27 y2=%271%27><stop offset=%270%27 stop-color=%27#FF3B30%27/><stop offset=%270.25%27 stop-color=%27#FFD400%27/><stop offset=%270.5%27 stop-color=%27#00C853%27/><stop offset=%270.75%27 stop-color=%27#8E3DFF%27/><stop offset=%271%27 stop-color=%27#FF2D95%27/></linearGradient></defs><circle cx=%2732%27 cy=%2732%27 r=%2717%27 fill=%27url(%23g)%27/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
   --shadow-l:8px 8px 0 var(--lila);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{
   background:var(--ink);
   color:var(--crema);
@@ -104,6 +104,7 @@ h1 .dot{color:var(--rosa)}
   transition:opacity .45s, transform .45s;white-space:nowrap;
 }
 .rotator span.active{opacity:1;transform:translateY(0)}
+.rotator span:not(.active)::after{visibility:hidden}
 .rotator span::after{
   content:"";display:inline-block;width:.09em;height:.82em;background:var(--rosa);
   margin-left:.1em;vertical-align:-.04em;animation:blink 1s steps(1) infinite;
@@ -163,7 +164,7 @@ section{padding:110px clamp(20px,5vw,56px);max-width:1240px;margin:0 auto}
 .eyebrow .d{color:var(--rosa)}
 h2{
   font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-.02em;
-  font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.05;max-width:760px;
+  font-size:clamp(1.8rem,7.5vw,3.6rem);line-height:1.05;overflow-wrap:break-word;max-width:760px;
 }
 h2 em{font-style:normal;color:var(--rosa)}
 .section-intro{max-width:620px;color:var(--gris);margin-top:20px;font-size:1.08rem}
@@ -265,7 +266,7 @@ a.eco-item:hover .eco-cta{color:var(--morado);border-color:var(--morado)}
   text-align:center;padding:130px clamp(20px,5vw,56px);
   position:relative;overflow:hidden;max-width:none;
 }
-.cta-final h2{margin:0 auto;font-size:clamp(2.6rem,7vw,5.4rem)}
+.cta-final h2{margin:0 auto;font-size:clamp(2rem,6vw,5.4rem);overflow-wrap:break-word;hyphens:none}
 .cta-final p{color:var(--gris);max-width:520px;margin:24px auto 0;font-size:1.1rem}
 .cta-final .hero-actions{justify-content:center;opacity:1;animation:none}
 .cta-glow{
@@ -291,30 +292,9 @@ footer .logo{font-size:1.05rem}
 }
 :focus-visible{outline:3px solid var(--morado);outline-offset:3px}
 
-/* ---------- CURSOR CUSTOM ---------- */
+/* ---------- BOTONES MAGNÉTICOS ---------- */
 @media (pointer:fine){
-  body{cursor:none}
-  a,button,.btn{cursor:none}
-  .cur-dot,.cur-ring{
-    position:fixed;top:0;left:0;pointer-events:none;z-index:1000;border-radius:50%;
-    transform:translate(-50%,-50%);
-  }
-  .cur-dot{
-    width:8px;height:8px;background:var(--rosa);
-    transition:width .2s, height .2s, background .2s;
-  }
-  .cur-ring{
-    width:38px;height:38px;border:1.5px solid var(--morado);
-    transition:width .25s, height .25s, border-color .25s, opacity .25s;
-    mix-blend-mode:difference;
-  }
-  body.cur-hover .cur-dot{width:14px;height:14px;background:var(--morado)}
-  body.cur-hover .cur-ring{width:64px;height:64px;border-color:var(--rosa)}
-  body.cur-down .cur-ring{width:28px;height:28px}
-}
-@media (pointer:coarse), (prefers-reduced-motion: reduce){
-  .cur-dot,.cur-ring{display:none}
-  body, a, button, .btn{cursor:auto}
+  .btn,.nav-cta{will-change:transform}
 }
 
 /* ---------- MOTION DISCRETO EN CTAs ---------- */
@@ -423,19 +403,13 @@ a.eco-item:hover .eco-cta{border-color:var(--r5)}
 .nav-cta:hover{transform:translate(-2px,-2px)}
 
 @media (pointer:fine){
-  .cur-dot{background:conic-gradient(var(--r1),var(--r3),var(--r4),var(--r5),var(--r6),var(--r7),var(--r1));animation:spin 2.4s linear infinite}
-  .cur-ring{border-color:var(--crema)}
-  body.cur-hover .cur-dot{background:conic-gradient(var(--r1),var(--r3),var(--r4),var(--r5),var(--r6),var(--r7),var(--r1))}
-  body.cur-hover .cur-ring{border-color:var(--r3)}
 }
 @media (prefers-reduced-motion: reduce){
-  .grad-text,.logo .dot,.logo .sub,h1 .dot,h2 em,.eyebrow .d,.card h3 .dot,.eco-item h4 .dot,.rotator span,.eco-cta,.marquee,.btn-primary,.nav-cta,.cur-dot,.hero-eyebrow::before{animation:none!important}
+  .grad-text,.logo .dot,.logo .sub,h1 .dot,h2 em,.eyebrow .d,.card h3 .dot,.eco-item h4 .dot,.rotator span,.eco-cta,.marquee,.btn-primary,.nav-cta,.hero-eyebrow::before{animation:none!important}
 }
 </style>
 </head>
 <body>
-<div class="cur-ring" aria-hidden="true"></div>
-<div class="cur-dot" aria-hidden="true"></div>
 
 <nav>
   <a class="logo" href="#top">tekis<span class="dot">.</span><span class="sub">services</span></a>
@@ -600,7 +574,7 @@ a.eco-item:hover .eco-cta{border-color:var(--r5)}
 <div class="cta-final">
   <div class="cta-glow" aria-hidden="true"></div>
   <p class="eyebrow reveal">contácta<span class="d">.</span>nos</p>
-  <h2 class="reveal">¡E<em>.</em>voluciona digitalmente!</h2>
+  <h2 class="reveal"><span style="display:inline-block">¡E<em>.</em>voluciona</span> <span style="display:inline-block">digitalmente!</span></h2>
   <p class="reveal">Únete a nosotros y descubre cómo podemos ayudarte a desbloquear tu máximo potencial en el mundo digital.</p>
   <div class="hero-actions reveal">
     <a class="btn btn-primary" href="https://wa.me/524771786634" target="_blank" rel="noopener">escríbeme por WhatsApp <span class="ico">💬</span></a>
@@ -631,22 +605,15 @@ if(!reduced && words.length){
 /* ---- cursor custom con inercia ---- */
 const fine = window.matchMedia('(pointer:fine)').matches;
 if(fine && !reduced){
-  const dot = document.querySelector('.cur-dot');
-  const ring = document.querySelector('.cur-ring');
-  let mx=-100,my=-100,rx=-100,ry=-100;
-  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-  (function loop(){
-    rx += (mx-rx)*.16; ry += (my-ry)*.16;
-    dot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
-    ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
-    requestAnimationFrame(loop);
-  })();
-  document.querySelectorAll('a,button,.btn').forEach(el=>{
-    el.addEventListener('mouseenter',()=>document.body.classList.add('cur-hover'));
-    el.addEventListener('mouseleave',()=>document.body.classList.remove('cur-hover'));
+  document.querySelectorAll('.btn, .nav-cta').forEach(el=>{
+    el.addEventListener('mousemove', e=>{
+      const r = el.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width/2)) / r.width;
+      const dy = (e.clientY - (r.top + r.height/2)) / r.height;
+      el.style.transform = `translate(${dx*8}px, ${dy*6}px)`;
+    });
+    el.addEventListener('mouseleave', ()=>{ el.style.transform = ''; });
   });
-  window.addEventListener('mousedown',()=>document.body.classList.add('cur-down'));
-  window.addEventListener('mouseup',()=>document.body.classList.remove('cur-down'));
 }
 
 /* ---- reveal on scroll ---- */
